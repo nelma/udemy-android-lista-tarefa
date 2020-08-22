@@ -1,10 +1,12 @@
 package com.example.aprenda.listadetarefas.activity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.aprenda.listadetarefas.R;
 import com.example.aprenda.listadetarefas.adapter.TarefaAdapter;
+import com.example.aprenda.listadetarefas.helpers.DbHelper;
 import com.example.aprenda.listadetarefas.helpers.RecyclerItemClickListener;
 import com.example.aprenda.listadetarefas.model.Tarefa;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -40,6 +42,13 @@ public class MainActivity extends AppCompatActivity {
 
         //Configurar recycler
         recyclerView = findViewById(R.id.recyclerView);
+
+        //definindo os itens
+        ContentValues cv = new ContentValues();
+        cv.put("nome", "Teste");
+
+        DbHelper db = new DbHelper(getApplicationContext());
+        db.getWritableDatabase().insert(DbHelper.TABELA_TAREFAS, null, cv );
 
 
         //Adicionar evento de clique
