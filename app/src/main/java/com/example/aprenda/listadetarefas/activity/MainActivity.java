@@ -8,6 +8,7 @@ import com.example.aprenda.listadetarefas.R;
 import com.example.aprenda.listadetarefas.adapter.TarefaAdapter;
 import com.example.aprenda.listadetarefas.helpers.DbHelper;
 import com.example.aprenda.listadetarefas.helpers.RecyclerItemClickListener;
+import com.example.aprenda.listadetarefas.helpers.TarefaDAO;
 import com.example.aprenda.listadetarefas.model.Tarefa;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -88,13 +89,18 @@ public class MainActivity extends AppCompatActivity {
     public void carregarListaTarefas() {
 
         //Tarefa estaticas
-        Tarefa t1 = new Tarefa();
-        t1.setNomeTarefa("Ir ao mercado");
-        listaTarefa.add(t1);
+//        Tarefa t1 = new Tarefa();
+//        t1.setNomeTarefa("Ir ao mercado");
+//        listaTarefa.add(t1);
+//
+//        Tarefa t2 = new Tarefa();
+//        t2.setNomeTarefa("Ir a feira");
+//        listaTarefa.add(t2);
 
-        Tarefa t2 = new Tarefa();
-        t2.setNomeTarefa("Ir a feira");
-        listaTarefa.add(t2);
+
+        TarefaDAO tarefaDAO = new TarefaDAO(getApplicationContext());
+        listaTarefa = tarefaDAO.listar();
+
 
         //configurar adapter
         tarefaAdapter = new TarefaAdapter(listaTarefa);

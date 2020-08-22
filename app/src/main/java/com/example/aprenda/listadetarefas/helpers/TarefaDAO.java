@@ -2,12 +2,14 @@ package com.example.aprenda.listadetarefas.helpers;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.aprenda.listadetarefas.model.Tarefa;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TarefaDAO implements ITarefaDAO {
@@ -49,6 +51,22 @@ public class TarefaDAO implements ITarefaDAO {
 
     @Override
     public List<Tarefa> listar() {
-        return null;
+
+        List<Tarefa> tarefas = new ArrayList<>();
+
+        String sql = "SELECT * FROM " + DbHelper.TABELA_TAREFAS + ";";
+
+        //selectionArgs será null, mas poderia ser os filtros para o select
+        Cursor c = le.rawQuery(sql, null);
+
+        while (c.moveToNext()) {
+            Tarefa tarefa = new Tarefa();
+            tarefa.setId(c.getLong(c.getColumnIndex("id")));
+            tarefa.setNomeTarefa(c.getString(c.getColumnIndex("nome")));
+
+            tarefas.add(tarefa);
+        }
+
+        return tarefas;
     }
 }

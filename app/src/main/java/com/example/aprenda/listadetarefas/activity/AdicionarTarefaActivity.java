@@ -40,14 +40,19 @@ public class AdicionarTarefaActivity extends AppCompatActivity {
                 Tarefa tarefa = new Tarefa();
                 tarefa.setNomeTarefa(editTarefa.getText().toString());
 
-                //Executa acao ao clicar em salvar
-                TarefaDAO tarefaDAO = new TarefaDAO(getApplicationContext());
-                tarefaDAO.salvar(tarefa);
+                if(!editTarefa.getText().toString().isEmpty()) {
+                    //Executa acao ao clicar em salvar
+                    TarefaDAO tarefaDAO = new TarefaDAO(getApplicationContext());
+                    tarefaDAO.salvar(tarefa);
 
-//                Toast.makeText(
-//                        AdicionarTarefaActivity.this,
-//                        "Botão salvar pressionado", Toast.LENGTH_SHORT
-//                ).show();
+                    //fechar a Activity
+                    finish();
+                } else {
+                    Toast.makeText(
+                            AdicionarTarefaActivity.this,
+                            "Texto tarefa obrigatório", Toast.LENGTH_SHORT
+                    ).show();
+                }
                 break;
         }
         return super.onOptionsItemSelected(item);
